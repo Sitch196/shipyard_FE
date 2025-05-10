@@ -1,17 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
 import { toast } from "react-toastify";
 import "./Login.styles.css";
-
-const validationSchema = Yup.object({
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(8, "Password must be at least 8 characters"),
-});
+import { validationSchema } from "./utils/validationSchema";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -37,7 +28,6 @@ const Login = () => {
         toast.error(errorData.message || "Invalid credentials");
       }
     } catch (error) {
-      console.error("Error logging in:", error);
       toast.error("Error during login. Please try again.");
     } finally {
       setSubmitting(false);

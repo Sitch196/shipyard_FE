@@ -1,20 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
 import { toast } from "react-toastify";
 import "./Register.styles.css";
+import { validationSchema } from "./utils/validationSchema";
 
-const validationSchema = Yup.object({
-  name: Yup.string().required("Name is required"),
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
-});
-
-const Register = () => {
+export const Register = () => {
   const navigate = useNavigate();
 
   const handleRegister = async (values: any, { setSubmitting }: any) => {
@@ -35,7 +25,6 @@ const Register = () => {
         toast.error(errorData.message || "Registration failed");
       }
     } catch (error) {
-      console.error("Error registering:", error);
       toast.error("Error during registration. Please try again.");
     } finally {
       setSubmitting(false);
@@ -130,5 +119,3 @@ const Register = () => {
     </div>
   );
 };
-
-export default Register;
