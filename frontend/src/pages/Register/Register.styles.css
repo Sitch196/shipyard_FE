@@ -1,14 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
 .register-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.register-background {
+  flex: 1;
+  background-image: url("/src/assets/background_pic.png");
+  background-size: cover;
+  background-position: center;
+  display: none;
+}
+
+.register-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: #f8f9fa;
-  padding: 1rem;
-  width: 100%;
-  box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  padding: 0;
+  background-color: whitesmoke;
+}
+
+@media screen and (min-width: 768px) {
+  .register-background {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .register-container {
+    background-image: url("/src/assets/background_pic_mobile.png");
+    background-size: cover;
+    background-position: center;
+  }
+  .register-content {
+    background-color: rgba(248, 249, 250, 0.85);
+    width: 100%;
+  }
+
+  .register-form {
+    background: rgba(255, 255, 255, 0.95);
+  }
 }
 
 .register-container h1 {

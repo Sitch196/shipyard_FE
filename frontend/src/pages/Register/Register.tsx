@@ -33,89 +33,92 @@ export const Register = () => {
 
   return (
     <div className="register-container">
-      <h1>Register</h1>
-      <Formik
-        initialValues={{
-          name: "",
-          email: "",
-          password: "",
-          isShipyardOwner: false,
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleRegister}
-      >
-        {({ errors, touched, isSubmitting }) => (
-          <Form className="register-form">
-            <div className="form-group">
-              <label htmlFor="name" className="form-label">
-                Full Name
+      <div className="register-background"></div>
+      <div className="register-content">
+        <h1>Register</h1>
+        <Formik
+          initialValues={{
+            name: "",
+            email: "",
+            password: "",
+            isShipyardOwner: false,
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleRegister}
+        >
+          {({ errors, touched, isSubmitting }) => (
+            <Form className="register-form">
+              <div className="form-group">
+                <label htmlFor="name" className="form-label">
+                  Full Name
+                </label>
+                <Field
+                  id="name"
+                  type="text"
+                  name="name"
+                  placeholder="Enter your full name"
+                  className="register-input"
+                />
+                {errors.name && touched.name && (
+                  <div className="error-message">{errors.name}</div>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email" className="form-label">
+                  Email Address
+                </label>
+                <Field
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email address"
+                  className="register-input"
+                />
+                {errors.email && touched.email && (
+                  <div className="error-message">{errors.email}</div>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
+                <Field
+                  id="password"
+                  type="password"
+                  name="password"
+                  placeholder="Choose a password (min. 8 characters)"
+                  className="register-input"
+                />
+                {errors.password && touched.password && (
+                  <div className="error-message">{errors.password}</div>
+                )}
+              </div>
+
+              <label className="register-checkbox">
+                <Field
+                  type="checkbox"
+                  name="isShipyardOwner"
+                  id="isShipyardOwner"
+                />
+                <span>Register as Shipyard Owner</span>
               </label>
-              <Field
-                id="name"
-                type="text"
-                name="name"
-                placeholder="Enter your full name"
-                className="register-input"
-              />
-              {errors.name && touched.name && (
-                <div className="error-message">{errors.name}</div>
-              )}
-            </div>
 
-            <div className="form-group">
-              <label htmlFor="email" className="form-label">
-                Email Address
-              </label>
-              <Field
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Enter your email address"
-                className="register-input"
-              />
-              {errors.email && touched.email && (
-                <div className="error-message">{errors.email}</div>
-              )}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-              <Field
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Choose a password (min. 8 characters)"
-                className="register-input"
-              />
-              {errors.password && touched.password && (
-                <div className="error-message">{errors.password}</div>
-              )}
-            </div>
-
-            <label className="register-checkbox">
-              <Field
-                type="checkbox"
-                name="isShipyardOwner"
-                id="isShipyardOwner"
-              />
-              <span>Register as Shipyard Owner</span>
-            </label>
-
-            <button
-              type="submit"
-              className="register-button"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Registering..." : "Register"}
-            </button>
-          </Form>
-        )}
-      </Formik>
-      <p className="register-link">
-        Already have an account? <a href="/">Login</a>
-      </p>
+              <button
+                type="submit"
+                className="register-button"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Registering..." : "Register"}
+              </button>
+            </Form>
+          )}
+        </Formik>
+        <p className="register-link">
+          Already have an account? <a href="/">Login</a>
+        </p>
+      </div>
     </div>
   );
 };
