@@ -12,7 +12,7 @@ const Login = () => {
   const handleLogin = async (values: any, { setSubmitting }: any) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/login`,
+        `https://shipyard-ba.onrender.com/auth/login`,
         {
           method: "POST",
           headers: {
