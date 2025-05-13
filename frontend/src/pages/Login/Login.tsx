@@ -4,36 +4,26 @@ import { toast } from "react-toastify";
 import "./Login.styles.css";
 import { validationSchema } from "./utils/validationSchema";
 import { useState } from "react";
+import { LoginValues } from "../../types";
+import { api } from "../../services/api";
 
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async (values: any, { setSubmitting }: any) => {
+  const handleLogin = async (values: LoginValues, { setSubmitting }: any) => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("token", data.access_token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        toast.success("Login successful!");
-        navigate("/dashboard");
-      } else {
-        const errorData = await response.json().catch(() => ({}));
-        toast.error(errorData.message || "Invalid credentials");
-      }
+      const data = await api.auth.login(values);
+      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      toast.success("Login successful!");
+      navigate("/dashboard");
     } catch (error) {
-      toast.error("Error during login. Please try again.");
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Error during login. Please try again."
+      );
     } finally {
       setSubmitting(false);
     }

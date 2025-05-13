@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.styles.css";
-
-interface Ship {
-  id: number;
-  name: string;
-  status: string;
-}
+import { Ship, User } from "../../types";
+import { api } from "../../services/api";
 
 const Dashboard = () => {
   const [ships, setShips] = useState<Ship[]>([]);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,16 +21,8 @@ const Dashboard = () => {
 
   const fetchShips = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/ships`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setShips(data);
-      }
+      const data = await api.ships.getAll();
+      setShips(data);
     } catch (error) {
       console.error("Error fetching ships:", error);
     }
