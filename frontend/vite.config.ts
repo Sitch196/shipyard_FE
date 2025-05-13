@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: "/",
   build: {
+    outDir: "dist",
     rollupOptions: {
       output: {
         manualChunks: undefined,
@@ -13,6 +14,11 @@ export default defineConfig({
     },
   },
   server: {
+    port: 5173,
+    host: true,
+    strictPort: true,
+  },
+  preview: {
     port: 5173,
     host: true,
   },

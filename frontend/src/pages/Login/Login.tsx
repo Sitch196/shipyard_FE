@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { toast } from "react-toastify";
 import "./Login.styles.css";
@@ -136,7 +136,7 @@ const Login = () => {
           )}
         </Formik>
         <p className="login-link">
-          Don't have an account? <a href="/register">Register</a>
+          Don't have an account? <Link to="/register">Register</Link>
         </p>
       </div>
     </div>

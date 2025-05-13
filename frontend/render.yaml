@@ -3,6 +3,9 @@ services:
     name: shipyard-frontend
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://shipyard-ba.onrender.com
     headers:
       - path: /*
         name: Cache-Control
@@ -11,3 +14,9 @@ services:
       - type: rewrite
         source: /*
         destination: /index.html
+    buildFilter:
+      paths:
+        - src/**/*.ts
+        - src/**/*.tsx
+        - package.json
+        - vite.config.ts
