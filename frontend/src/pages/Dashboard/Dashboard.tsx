@@ -26,7 +26,7 @@ const Dashboard = () => {
   const fetchShips = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3000/ships", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/ships`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

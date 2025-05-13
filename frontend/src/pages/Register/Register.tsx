@@ -10,7 +10,7 @@ export const Register = () => {
   const handleRegister = async (values: any, { setSubmitting }: any) => {
     try {
       const response = await fetch(
-        "https://shipyard-ba.onrender.com/auth/register",
+        `${import.meta.env.VITE_API_URL}/auth/register`,
         {
           method: "POST",
           headers: {
