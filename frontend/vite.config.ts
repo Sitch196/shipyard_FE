@@ -7,14 +7,15 @@ export default defineConfig({
   base: "/",
   build: {
     outDir: "dist",
+    assetsDir: "assets",
+    emptyOutDir: true,
     rollupOptions: {
       output: {
         manualChunks: undefined,
       },
     },
-    // Ensure index.html is copied to dist
-    assetsDir: "assets",
-    emptyOutDir: true,
+    // Ensure static assets are copied correctly
+    copyPublicDir: true,
   },
   server: {
     port: 5173,
