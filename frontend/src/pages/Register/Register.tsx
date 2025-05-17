@@ -50,11 +50,7 @@ export const Register = () => {
     <div className="register-container">
       <div className="register-background">
         <img
-          src={
-            isMobile
-              ? "/src/assets/background_pic_mobile.png"
-              : "/src/assets/background_pic.png"
-          }
+          src={isMobile ? "/background_pic_mobile.png" : "/background_pic.png"}
           alt="Register background"
           onLoad={() => setImageLoaded(true)}
           style={{

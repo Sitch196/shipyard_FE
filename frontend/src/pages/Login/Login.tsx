@@ -44,11 +44,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-background">
         <img
-          src={
-            isMobile
-              ? "/src/assets/background_pic_mobile.png"
-              : "/src/assets/background_pic.png"
-          }
+          src={isMobile ? "/background_pic_mobile.png" : "/background_pic.png"}
           alt="Login background"
           onLoad={() => setImageLoaded(true)}
           style={{
