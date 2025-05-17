@@ -12,6 +12,9 @@ export default defineConfig({
         manualChunks: undefined,
       },
     },
+    // Ensure index.html is copied to dist
+    assetsDir: "assets",
+    emptyOutDir: true,
   },
   server: {
     port: 5173,
