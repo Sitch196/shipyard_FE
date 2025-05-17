@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { toast } from "react-toastify";
@@ -6,6 +7,17 @@ import { validationSchema } from "./utils/validationSchema";
 
 export const Register = () => {
   const navigate = useNavigate();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleRegister = async (values: any, { setSubmitting }: any) => {
     try {
@@ -36,7 +48,24 @@ export const Register = () => {
 
   return (
     <div className="register-container">
-      <div className="register-background"></div>
+      <div className="register-background">
+        <img
+          src={
+            isMobile
+              ? "/src/assets/background_pic_mobile.png"
+              : "/src/assets/background_pic.png"
+          }
+          alt="Register background"
+          onLoad={() => setImageLoaded(true)}
+          style={{
+            opacity: imageLoaded ? 1 : 0,
+            transition: "opacity 0.3s ease-in",
+          }}
+          loading="eager"
+          width={isMobile ? "100%" : "50%"}
+          height="100%"
+        />
+      </div>
       <div className="register-content">
         <h1>Register</h1>
         <Formik

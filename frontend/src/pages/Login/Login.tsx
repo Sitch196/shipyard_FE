@@ -1,15 +1,26 @@
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { toast } from "react-toastify";
 import "./Login.styles.css";
 import { validationSchema } from "./utils/validationSchema";
-import { useState } from "react";
 import { LoginValues } from "../../types";
 import { api } from "../../services/api";
 
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleLogin = async (values: LoginValues, { setSubmitting }: any) => {
     try {
@@ -31,7 +42,24 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-background"></div>
+      <div className="login-background">
+        <img
+          src={
+            isMobile
+              ? "/src/assets/background_pic_mobile.png"
+              : "/src/assets/background_pic.png"
+          }
+          alt="Login background"
+          onLoad={() => setImageLoaded(true)}
+          style={{
+            opacity: imageLoaded ? 1 : 0,
+            transition: "opacity 0.3s ease-in",
+          }}
+          loading="eager"
+          width={isMobile ? "100%" : "50%"}
+          height="100%"
+        />
+      </div>
       <div className="login-content">
         <h1>Login</h1>
         <Formik
