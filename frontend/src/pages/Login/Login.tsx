@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { toast } from "react-toastify";
@@ -11,16 +11,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const handleLogin = async (values: LoginValues, { setSubmitting }: any) => {
     try {
@@ -44,15 +34,11 @@ const Login = () => {
     <div className="login-container">
       <div className="login-background">
         <img
-          src={isMobile ? "/background_pic_mobile.png" : "/background_pic.png"}
+          src={"/background_pic.png"}
           alt="Login background"
+          className={imageLoaded ? "loaded" : ""}
           onLoad={() => setImageLoaded(true)}
-          style={{
-            opacity: imageLoaded ? 1 : 0,
-            transition: "opacity 0.3s ease-in",
-          }}
-          loading="eager"
-          width={isMobile ? "100%" : "50%"}
+          loading="lazy"
           height="100%"
         />
       </div>

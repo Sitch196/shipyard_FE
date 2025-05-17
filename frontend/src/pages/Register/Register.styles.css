@@ -35,6 +35,12 @@ body {
   object-position: center;
   display: block;
   max-width: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.register-background img.loaded {
+  opacity: 1;
 }
 
 .register-content {
