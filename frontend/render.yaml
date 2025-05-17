@@ -6,3 +6,18 @@ static_sites:
       - path: "/*"
         destination: "/index.html"
         rewrite: true
+    headers:
+      - path: "/*.jpg"
+        cacheControl: "public, max-age=31536000, immutable"
+      - path: "/*.jpeg"
+        cacheControl: "public, max-age=31536000, immutable"
+      - path: "/*.png"
+        cacheControl: "public, max-age=31536000, immutable"
+      - path: "/*.webp"
+        cacheControl: "public, max-age=31536000, immutable"
+      - path: "/*.avif"
+        cacheControl: "public, max-age=31536000, immutable"
+      - path: "/*.svg"
+        cacheControl: "public, max-age=31536000, immutable"
+      - path: "/*.gif"
+        cacheControl: "public, max-age=31536000, immutable"
